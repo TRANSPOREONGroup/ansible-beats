@@ -44,7 +44,7 @@
 
 - name: "Debian - Ensure {{ beat }} is installed"
   apt:
-    name: "{{ beat }}{{ beats_version | bool | ternary('={{ beats_version }}', '') }}"
+    name: "{{ beat }}{{ beats_version | d(False) | ternary('=' + beats_version |d(''), '') }}"
     state: present
     cache_valid_time: 86400
   when: use_repository | bool
