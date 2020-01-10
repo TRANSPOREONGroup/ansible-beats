@@ -30,7 +30,6 @@
     state: present
     update_cache: yes
   when: use_repository | bool
-  register: beat_install
   notify: restart beat
 
 - name: "RedHat - lock {{ beat }} version"
@@ -43,5 +42,4 @@
     name: "{{ custom_package_url | default('{{ beats_package_url }}/{{ beat }}-{{ beats_version }}-{{ ansible_architecture }}.rpm', true) }}"
     state: present
   when: not ( use_repository | bool )
-  register: beat_install
   notify: restart beat

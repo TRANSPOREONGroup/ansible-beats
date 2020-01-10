@@ -25,7 +25,6 @@
         name: apt-transport-https
         state: present
         cache_valid_time: 86400
-      register: beat_install
       notify: restart beat
 
     - name: Debian - Add beats repository key
@@ -49,7 +48,6 @@
     state: present
     cache_valid_time: 86400
   when: use_repository | bool
-  register: beat_install
   notify: restart beat
 
 - name: "Debian - hold {{ beat }} version"
@@ -72,6 +70,5 @@
     - name: "Debian - Ensure {{ beat }} is installed from downloaded package"
       apt:
         deb: "/tmp/{{ beat }}_{{ beats_version }}_{{ os_arch }}.deb"
-      register: beat_install
       notify: restart beat
   when: not ( use_repository | bool )

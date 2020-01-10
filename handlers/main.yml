@@ -10,4 +10,3 @@
     - start_service | bool
     - restart_on_change | bool
     - not beats_started.changed
-    - beat_install.changed
