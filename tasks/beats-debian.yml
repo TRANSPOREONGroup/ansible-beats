@@ -46,6 +46,8 @@
   apt:
     name: "{{ beat }}{{ beats_version | d(False) | ternary('=' + beats_version |d(''), '') }}"
     state: present
+    dpkg_options: 'force-downgrade,force-confold,force-confdef'
+    force: yes
     cache_valid_time: 86400
   when: use_repository | bool
   notify: restart beat
