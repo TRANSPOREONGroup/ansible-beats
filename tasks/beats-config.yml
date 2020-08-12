@@ -52,7 +52,7 @@
     force: yes
     owner: root
     group: root
-  notify: restart beat
+  notify: "restart {{ beat }}"
 
 - name: Copy Configuration File
   template:
@@ -62,4 +62,4 @@
     force: yes
     owner: root
     group: root
-  notify: restart beat
+  notify: "restart {{ beat }}"

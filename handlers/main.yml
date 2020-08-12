@@ -1,11 +1,28 @@
 ---
 # handlers file for beats
 
-- name: restart beat
-  service:
-    name: "{{ beat }}"
-    state: restarted
-    enabled: yes
+- name: Block for all beats
+  block:
+    - name: restart filebeat
+      service:
+        name: filebeat
+        state: restarted
+        enabled: yes
+    - name: restart packetbeat
+      service:
+        name: packetbeat
+        state: restarted
+        enabled: yes
+    - name: restart metricbeat
+      service:
+        name: metricbeat
+        state: restarted
+        enabled: yes
+    - name: restart journalbeat
+      service:
+        name: journalbeat
+        state: restarted
+        enabled: yes
   when:
     - start_service | bool
     - restart_on_change | bool

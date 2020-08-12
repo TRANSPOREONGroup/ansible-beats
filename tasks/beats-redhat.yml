@@ -30,7 +30,7 @@
     state: present
     update_cache: yes
   when: use_repository | bool
-  notify: restart beat
+  notify: "restart {{ beat }}"
 
 - name: "RedHat - lock {{ beat }} version"
   shell: "yum versionlock add {{ beat }}{{ beats_version | bool | ternary('={{ beats_version }}', '') }}"  # noqa 303
@@ -42,4 +42,4 @@
     name: "{{ custom_package_url | default('{{ beats_package_url }}/{{ beat }}-{{ beats_version }}-{{ ansible_architecture }}.rpm', true) }}"
     state: present
   when: not ( use_repository | bool )
-  notify: restart beat
+  notify: "restart {{ beat }}"
