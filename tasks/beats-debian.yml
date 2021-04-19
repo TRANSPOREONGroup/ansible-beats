@@ -20,9 +20,11 @@
 
 - name: Debian - Ensure beats apt repository is configured
   block:
-    - name: Debian - Ensure apt-transport-https is installed
+    - name: Debian - Ensure required packages are installed
       apt:
-        name: apt-transport-https
+        name:
+          - apt-transport-https
+          - gpg
         state: present
         cache_valid_time: 86400
       notify: "restart {{ beat }}"
